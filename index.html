@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Une page d'anniversaire douce et sincere, ecrite comme un vrai message d'amour."
+    />
+    <title>Joyeux anniversaire Jemiss</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@9/swiper-bundle.min.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              roseLove: "#FF4D8D",
+              roseSoft: "#FFC1D6",
+              violetDream: "#8B5CF6",
+              goldLight: "#FFD700",
+              nightSky: "#13061f",
+              mistWhite: "rgba(255,255,255,0.12)"
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Playfair Display", "serif"]
+            },
+            boxShadow: {
+              glow: "0 10px 30px rgba(255, 77, 141, 0.28)",
+              glass: "0 18px 60px rgba(17, 12, 46, 0.25)"
+            },
+            backgroundImage: {
+              aurora:
+                "radial-gradient(circle at top left, rgba(255, 193, 214, 0.26), transparent 35%), radial-gradient(circle at top right, rgba(139, 92, 246, 0.28), transparent 32%), linear-gradient(180deg, #13061f 0%, #22103b 48%, #160718 100%)"
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="bg-nightSky text-white selection:bg-roseLove/40">
+    <a
+      href="#main-content"
+      class="skip-link focus-visible:translate-y-0"
+    >
+      Aller au contenu principal
+    </a>
+
+    <canvas
+      id="sky-canvas"
+      class="pointer-events-none fixed inset-0 z-0 h-full w-full"
+      aria-hidden="true"
+    ></canvas>
+
+    <div
+      id="global-particles"
+      class="pointer-events-none fixed inset-0 z-10 overflow-hidden"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      id="floating-hearts"
+      class="pointer-events-none fixed inset-0 z-10 overflow-hidden"
+      aria-hidden="true"
+    ></div>
+
+    <audio
+      id="love-audio"
+      preload="auto"
+      loop
+      playsinline
+      aria-hidden="true"
+    >
+      <source src="assets/media/romance.mp3" type="audio/mpeg" />
+    </audio>
+
+    <button
+      id="audio-toggle"
+      type="button"
+      class="glass-button fixed right-4 top-4 z-50 flex items-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-white shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-goldLight"
+      aria-pressed="false"
+      aria-label="Activer ou couper la musique"
+    >
+      <i class="fa-solid fa-music" aria-hidden="true"></i>
+      <span>Musique</span>
+    </button>
+
+    <main id="main-content" class="relative z-20 overflow-x-hidden">
+      <section
+        id="hero"
+        class="section-shell min-h-screen bg-aurora"
+        aria-labelledby="hero-title"
+      >
+        <div class="mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 py-12 text-center">
+          <div class="glass-panel max-w-4xl p-8 md:p-12">
+            <p
+              class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-sm font-medium text-roseSoft"
+            >
+              <i class="fa-solid fa-heart" aria-hidden="true"></i>
+              Un message rien que pour toi, Jemiss
+            </p>
+
+            <h1
+              id="hero-title"
+              class="hero-line font-display text-4xl font-extrabold leading-tight md:text-6xl"
+              data-text="Aujourd'hui, j'avais juste envie de te celebrer."
+            >
+              Aujourd'hui, j'avais juste envie de te celebrer.
+            </h1>
+
+            <p
+              class="hero-line mt-6 font-display text-3xl font-bold text-roseSoft md:text-5xl"
+              data-text="Joyeux anniversaire, mon coeur"
+            >
+              Joyeux anniversaire, mon coeur
+            </p>
+
+            <p class="mx-auto mt-8 max-w-2xl text-base leading-8 text-white/80 md:text-lg">
+              Je n'ai pas cherche a faire quelque chose de parfait. Je voulais
+              juste te laisser une page simple, sincere, et remplie de tout ce
+              que je ressens pour toi.
+            </p>
+
+            <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <button
+                id="enter-experience"
+                type="button"
+                class="glass-button inline-flex items-center gap-3 rounded-full px-7 py-4 text-base font-semibold text-white shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-goldLight"
+                aria-describedby="intro-help"
+              >
+                <i class="fa-solid fa-gift" aria-hidden="true"></i>
+                <span>Ouvrir cette surprise</span>
+              </button>
+              <span id="intro-help" class="text-sm text-white/65">
+                La musique commencera quand tu arriveras au chapitre 2.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="love-letter"
+        class="section-shell relative py-10 md:py-12"
+        aria-labelledby="letter-title"
+      >
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mb-8 text-center">
+            <p class="section-kicker">Chapitre 1</p>
+            <h2 id="letter-title" class="section-title">
+              Quelques mots que je voulais vraiment te dire
+            </h2>
+            <p class="section-copy">
+              Ouvre l'enveloppe. Ce n'est pas une grande declaration, juste des
+              mots vrais que j'avais envie de te laisser.
+            </p>
+          </div>
+
+          <div class="mx-auto max-w-3xl">
+            <div
+              id="envelope-scene"
+              class="envelope-scene"
+              tabindex="0"
+              role="button"
+              aria-expanded="false"
+              aria-controls="letter-paper"
+              aria-label="Ouvrir l'enveloppe romantique"
+            >
+              <div class="envelope-shell">
+                <div class="envelope-back"></div>
+                <div class="envelope-side envelope-side-left" aria-hidden="true"></div>
+                <div class="envelope-side envelope-side-right" aria-hidden="true"></div>
+                <div class="envelope-flap"></div>
+                <div class="envelope-glow" aria-hidden="true"></div>
+                <article
+                  id="letter-paper"
+                  class="letter-paper"
+                  aria-live="polite"
+                >
+                  <h3 class="font-display text-2xl text-roseLove">
+                    Jemiss,
+                  </h3>
+                  <div
+                    id="typed-letter"
+                    class="mt-4 whitespace-pre-line text-left text-base leading-8 text-slate-700"
+                    data-full-text="Je ne sais pas toujours dire parfaitement ce que je ressens, alors je te l'ecris simplement. Depuis que tu fais partie de ma vie, beaucoup de choses sont devenues plus belles. Il suffit parfois d’un message de toi, d’un appel ou d’un moment passé ensemble pour que ma journée change complètement. Tu as cette façon de rendre les choses plus légères, plus simples, sans même t’en rendre compte. Pour ton anniversaire, je voulais surtout te rappeler à quel point tu comptes pour moi. J’aime ta façon d’être, ta douceur, ton sourire, ton rire et tous ces petits détails qui font de toi la personne que tu es. J’aime aussi la manière dont tu apportes de la joie autour de toi et dont tu rends les moments passés ensemble si précieux. Je ne te souhaite pas une année parfaite, mais une année heureuse. Une année remplie de belles surprises, de projets qui avancent, de moments qui te font sourire et de personnes qui te font du bien. Tu mérites sincèrement tout cela. Et j’espère que dans cette nouvelle année de ta vie, je pourrai continuer à être à tes côtés, partager tes joies, te soutenir dans les moments plus difficiles et créer encore plein de beaux souvenirs avec toi. Merci pour tout ce que tu apportes dans ma vie, et surtout merci d’être toi. Joyeux anniversaire, mon amour.">
+                  </div>
+                </article>
+                <div class="envelope-front">
+                  <span class="seal" aria-hidden="true">
+                    <i class="fa-solid fa-heart"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="mt-5 text-center text-sm text-white/65">
+              Clique ou appuie sur Entrer pour lire cette lettre.
+            </p>
+
+            <div class="mt-8 flex justify-center">
+              <button
+                id="letter-read-button"
+                type="button"
+                class="glass-button rounded-full px-6 py-3 text-sm font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-goldLight"
+              >
+                Continuer
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="memories"
+        class="section-shell py-10 md:py-12"
+        aria-labelledby="memories-title"
+      >
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="mb-8 text-center">
+            <p class="section-kicker">Chapitre 2</p>
+            <h2 id="memories-title" class="section-title">
+              Toi, ton sourire, et tout ce que tu degages
+            </h2>
+            <p class="section-copy">
+              Cette partie parle surtout de toi. De ton sourire, de ton regard,
+              et de la facon bien a toi d'etre belle, douce et impossible a oublier.
+            </p>
+          </div>
+
+          <div class="swiper memories-swiper glass-panel p-4 md:p-6">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <figure class="memory-card">
+                  <img
+                    src="assets/img/IMG-20250822-WA0086.jpg"
+                    alt="Jemiss avec un sourire doux"
+                    loading="lazy"
+                    class="memory-image"
+                  />
+                  <figcaption class="memory-caption">
+                    <span class="memory-date"></span>
+                    <p>Il y a dans ton sourire quelque chose de calme et de vrai, quelque chose qui reste dans ma tete longtemps apres.</p>
+                  </figcaption>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="memory-card">
+                  <img
+                    src="assets/img/IMG-20250912-WA0089.jpg"
+                    alt="Jemiss en train de sourire naturellement"
+                    loading="lazy"
+                    class="memory-image"
+                  />
+                  <figcaption class="memory-caption">
+                    <span class="memory-date"></span>
+                    <p>J'aime la facon dont tu souris sans forcer. C'est simple, naturel, et ca suffit pour rendre tout plus beau.</p>
+                  </figcaption>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="memory-card">
+                  <img
+                    src="assets/img/IMG-20251220-WA0095.jpg"
+                    alt="Portrait de Jemiss avec une expression douce"
+                    loading="lazy"
+                    class="memory-image"
+                  />
+                  <figcaption class="memory-caption">
+                    <span class="memory-date"></span>
+                    <p>Ce que j'aime chez toi, ce n'est pas seulement ce qu'on voit. C'est aussi la douceur, la tendresse et la paix que tu degages.</p>
+                  </figcaption>
+                </figure>
+              </div>
+              <div class="swiper-slide">
+                <figure class="memory-card">
+                  <img
+                    src="assets/img/IMG-20260602-WA0068.jpg"
+                    alt="Jemiss rayonnante avec son sourire"
+                    loading="lazy"
+                    class="memory-image"
+                  />
+                  <figcaption class="memory-caption">
+                    <span class="memory-date"></span>
+                    <p>Ton sourire a quelque chose de rare. Il ne fait pas juste joli, il rassure, il attire, et il donne envie de rester pres de toi.</p>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="mt-6 flex items-center justify-between gap-4">
+              <div class="swiper-button-prev !static"></div>
+              <div class="swiper-pagination !static flex-1"></div>
+              <div class="swiper-button-next !static"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="jemiss-section"
+        class="section-shell py-10 md:py-12"
+        aria-labelledby="jemiss-title"
+      >
+        <div class="mx-auto max-w-5xl px-6">
+          <div class="mb-8 text-center">
+            <p class="section-kicker">Chapitre 3</p>
+            <h2 id="jemiss-title" class="section-title">Pour toi, Jemiss</h2>
+            <p class="section-copy">
+              Quand je pense a toi  il y a des choses qui me
+              reviennent toujours tel que ton calme, ton energie et la place tres
+              naturelle que tu as prise dans ma vie.
+            </p>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-3">
+            <article class="glass-panel p-6 text-center">
+              <p class="section-kicker mb-3 text-[0.72rem]">Ta douceur</p>
+              <p class="text-base leading-8 text-white/82">
+                Tu sais apaiser sans en faire trop. Parfois, ta presence ou
+                quelques mots de toi suffisent deja a me faire du bien.
+              </p>
+            </article>
+
+            <article class="glass-panel p-6 text-center">
+              <p class="section-kicker mb-3 text-[0.72rem]">Ton aura</p>
+              <p class="text-base leading-8 text-white/82">
+                Tu apportes quelque chose de vivant et de doux. Meme une
+                journee banale change un peu quand il y a toi dedans.
+              </p>
+            </article>
+
+            <article class="glass-panel p-6 text-center">
+              <p class="section-kicker mb-3 text-[0.72rem]">Mon coeur</p>
+              <p class="text-base leading-8 text-white/82">
+                Plus le temps passe, plus je comprends que ce que je ressens
+                pour toi est simple, fort et surtout tres sincere.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="reasons"
+        class="section-shell py-10 md:py-12"
+        aria-labelledby="reasons-title"
+      >
+        <div class="mx-auto max-w-4xl px-6 text-center">
+          <p class="section-kicker">Chapitre 4</p>
+          <h2 id="reasons-title" class="section-title">Ce que j'aime sincerement chez toi</h2>
+          <p class="section-copy">
+            A chaque clic, une petite raison apparait. Rien de grandiose, juste
+            des choses vraies que je pense de toi.
+          </p>
+
+          <div class="glass-panel mt-8 p-8 md:p-10">
+            <button
+              id="reason-button"
+              type="button"
+              class="glass-button rounded-full px-6 py-4 text-base font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-goldLight"
+            >
+              Lire une raison
+            </button>
+
+            <div
+              id="reason-display"
+              class="mt-8 min-h-[160px] rounded-3xl border border-white/10 bg-white/6 p-6 text-left shadow-glass"
+              aria-live="polite"
+            >
+              <p class="text-lg leading-8 text-white/85">
+                Clique pour lire une premiere raison.
+              </p>
+            </div>
+
+            <p id="reason-progress" class="mt-4 text-sm text-white/60">
+              0 raison decouverte
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="birthday-cake"
+        class="section-shell pb-12 pt-10 md:pb-16 md:pt-12"
+        aria-labelledby="cake-title"
+      >
+        <div class="mx-auto max-w-5xl px-6">
+          <div class="mb-8 text-center">
+            <p class="section-kicker">Chapitre final</p>
+            <h2 id="cake-title" class="section-title">Fais un voeu</h2>
+            <p class="section-copy">
+              Je voulais finir cette page avec quelque chose de simple, parce
+              que parfois ce sont les gestes les plus simples qui restent le plus.
+            </p>
+          </div>
+
+              <div class="glass-panel cake-stage px-6 py-8 md:px-10 md:py-10">
+            <div class="mx-auto max-w-2xl text-center">
+              <div
+                id="cake-scene"
+                class="cake-scene"
+                tabindex="0"
+                role="button"
+                aria-pressed="false"
+                aria-describedby="cake-instructions"
+              >
+                <div class="cake-candle candle-left" aria-hidden="true">
+                  <span class="candle-wick"></span>
+                  <span class="candle-flame"></span>
+                </div>
+                <div class="cake-candle candle-center" aria-hidden="true">
+                  <span class="candle-wick"></span>
+                  <span class="candle-flame"></span>
+                </div>
+                <div class="cake-candle candle-right" aria-hidden="true">
+                  <span class="candle-wick"></span>
+                  <span class="candle-flame"></span>
+                </div>
+                <div class="cake-top icing-drip" aria-hidden="true"></div>
+                <div class="cake-layer cake-layer-top" aria-hidden="true"></div>
+                <div class="cake-layer cake-layer-bottom" aria-hidden="true"></div>
+                <div class="cake-plate" aria-hidden="true"></div>
+              </div>
+
+              <p id="cake-instructions" class="mt-6 text-sm text-white/70">
+                Clique, touche ou appuie sur Entrer pour souffler les bougies.
+              </p>
+
+              <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <button
+                  id="blow-candles-button"
+                  type="button"
+                  class="glass-button rounded-full px-6 py-4 text-base font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-goldLight"
+                >
+                  Souffler les bougies
+                </button>
+                <button
+                  id="reset-cake-button"
+                  type="button"
+                  class="glass-button rounded-full px-6 py-4 text-base font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-goldLight"
+                >
+                  Les rallumer
+                </button>
+              </div>
+
+              <div
+                id="cake-message"
+                class="glass-panel mx-auto mt-8 max-w-2xl p-8 text-center"
+                aria-live="polite"
+              >
+                <h3 class="font-display text-2xl text-roseSoft">Prends un instant</h3>
+                <p class="mt-4 text-base leading-8 text-white/80">
+                  Souffle les bougies quand tu veux. J'ai prepare une vraie petite fete de lumiere pour ce moment.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sr-only" aria-live="polite" id="cake-status">
+            Les bougies sont allumees.
+          </div>
+
+
+          <div class="pb-4 pt-6 text-center">
+            <p class="font-display text-3xl text-roseSoft md:text-4xl">
+              Je t'aime tres fort, Jemiss
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div
+      id="celebration-overlay"
+      class="celebration-overlay"
+      aria-hidden="true"
+    >
+      <div class="celebration-backdrop"></div>
+      <canvas
+        id="celebration-fireworks"
+        class="celebration-canvas"
+        aria-hidden="true"
+      ></canvas>
+      <canvas
+        id="celebration-particles"
+        class="celebration-canvas"
+        aria-hidden="true"
+      ></canvas>
+      <div
+        id="celebration-hearts"
+        class="celebration-hearts"
+        aria-hidden="true"
+      ></div>
+      <div
+        id="celebration-bubbles"
+        class="celebration-bubbles"
+        aria-hidden="true"
+      ></div>
+      <div
+        id="celebration-stars"
+        class="celebration-stars"
+        aria-hidden="true"
+      ></div>
+      <div class="celebration-center" aria-live="polite">
+        <p class="celebration-kicker">Blessing Katala</p>
+        <h3
+          id="celebration-message"
+          class="celebration-message"
+          data-text="Bon anniversaire mon bonheur"
+        >
+           Joyeux anniversaire ma Jemiss 
+        </h3>
+        <p class="celebration-copy">
+          Que ce jour soit aussi merveilleux que ton sourire.
+        </p>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
